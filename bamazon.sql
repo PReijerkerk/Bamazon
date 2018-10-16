@@ -12,7 +12,7 @@ CREATE TABLE products (
     item_id INT NOT NULL AUTO_INCREMENT,
     product_name VARCHAR(50) NULL,
     department_name VARCHAR(50) NULL,
-    price INT(10) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
     stock_quantity INT(100) NULL,
     PRIMARY KEY (item_id)
 );
@@ -21,7 +21,7 @@ INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("The Very Hungry Caterpiller", "Books", 6.59, 100);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("Red Dead Redemption 2", ("Video Games", 59.96, 1000);
+VALUES ("Red Dead Redemption 2", "Video Games", 59.96, 1000);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Hocus Pocus", "Movies", 2.99, 50);
