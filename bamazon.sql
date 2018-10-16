@@ -16,3 +16,33 @@ CREATE TABLE products (
     stock_quantity INT(100) NULL,
     PRIMARY KEY (item_id)
 );
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("The Very Hungry Caterpiller", "Books", 6.59, 100);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("Red Dead Redemption 2", ("Video Games", 59.96, 1000);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("Hocus Pocus", "Movies", 2.99, 50);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("Frosted Mini-Wheats", "Breakfast Foods", 3.50, 20);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("Aspen Pet Oval", "Pets", 11.75, 300);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("Joking Hazard", "Board Games", 25.00, 600);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("Callaway 2017 Supersoft Golf Balls", "Sports", 21.49, 10000);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("Adult unisex bumble bee costume", "Clothing", 15.38, 10);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("Echo", "Electronics", 99.99, 30);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("CamelBak", "Camping", 17.00, 200);
