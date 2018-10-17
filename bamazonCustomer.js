@@ -22,6 +22,7 @@ connection.connect(function(err) {
   if (err) throw err;
   console.log("This worked!");
   displayProducts();
+  userChoice();
   connection.end();
 });
 
@@ -38,7 +39,35 @@ const displayProducts = function (){
 };
 
 //Inquirer prompt asking user which unit they would like to buy
-
+const userChoice = function () {
+  connection.query("SELECT * FROM products", function(err, res){ 
+    if (err) throw err;
+    inquirer.prompt([
+      {
+        name: "choice",
+        type: "rawlist",
+        choices: function(){
+          let choiceArray=[];
+          for (var i = 0; i < res.length; i++) {
+            choiceArray.push(res[i].item_id);
+        }
+        return choiceArray;
+      },
+        message: "What item_id were you interested in buying?"
+        },
+      {
+        name: "amount",
+        type: "input",
+        message: "How many of the item did you want to buy?"
+      }
+    ])
+    .then(function(answer) {
+  
+    })
+  });
+  
+  };
+  
 //Inquirer prompt asking user how many items of [id] they would like to buy
 
 //Checks the database to determine if stock_quantity for the [id] is enough to fulfill the order
