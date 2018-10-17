@@ -22,15 +22,29 @@ connection.connect(function(err) {
   if (err) throw err;
   console.log("This worked!");
   displayProducts();
+  connection.end();
 });
 
+//Function that displays all items in the product table
 const displayProducts = function (){
   let query = "Select * FROM products";
   connection.query(query, function(err, res) {
     if (err) throw err;
 
     for (var i = 0; i < res.length; i++)
+      //Logs the item id, name, and price of each item in the table
       console.log("Product ID: " + res[i].item_id + " || Product Name: " + res[i].product_name + " || Price: " + res[i].price);
   });
 };
+
+//Inquirer prompt asking user which unit they would like to buy
+
+//Inquirer prompt asking user how many items of [id] they would like to buy
+
+//Checks the database to determine if stock_quantity for the [id] is enough to fulfill the order
+
+
+//fulfills the customers order by updating the database for new stock_quantity and displays the users total purchase price
+
+//If stock_quantity is not sufficient to fulfill the user order, displays Insufficient Quantity!
 
