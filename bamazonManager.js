@@ -68,7 +68,7 @@ const viewProducts = function() {
         console.log("Product ID: " + res[i].item_id + " || Product Name: " + res[i].product_name + " || Price: " + res[i].price + " || Quantity: " + res[i].stock_quantity);
         }
         console.log("------------");
-        //Allows manager to select another action
+        //Allows user to select another action
         selectAction();
     });
 };
@@ -83,11 +83,12 @@ const viewLowInventory = function() {
             console.log("Product ID: " + res[i].item_id + " || Product Name: " + res[i].product_name +  " || Quantity: " + res[i].stock_quantity);
         }
         console.log("------------");
-        //Allows manager to select another action
+        //Allows user to select another action
         selectAction();
     });
 };
 
+//Adds stock to an existing product in the database
 const addInventory = function() {
     inquirer.prompt([
         {
@@ -126,7 +127,7 @@ const addInventory = function() {
                     throw err;
                 } else {
                 console.log("------------");
-                //Lets manager select a new action
+                //Lets user select a new action
                 selectAction();
                 }
             });
@@ -134,6 +135,7 @@ const addInventory = function() {
     });
 };
 
+//Adds a new product to the database
 const addProduct = function () {
     inquirer.prompt ([
         {
@@ -157,6 +159,7 @@ const addProduct = function () {
             message: 'What is the current quantity of this new product?'
         }
     ]).then(function(answer) {
+        //Inserts the users inputs into the database products table
         connection.query("INSERT INTO products SET ?", {
             product_name: answer.product_name,
             department_name: answer.department_name,
@@ -168,6 +171,7 @@ const addProduct = function () {
             } else {
                 console.log("Product added sucessfully!");
                 console.log("------------");
+                //Lets user select a new action
                 selectAction();
             }
         });
