@@ -1,13 +1,13 @@
 -- Used to make sure database builds from scratch while coding this assignment
 DROP DATABASE IF EXISTS bamazon_DB;
 
---Creates the database bamazon_DB
+-- Creates the database bamazon_DB
 CREATE DATABASE bamazon_DB;
 
---Makes sure all data is input into bamazon_DB
+-- Makes sure all data is input into bamazon_DB
 USE bamazon_DB;
 
---Creates a table called products which will hold the products available on Bamazon
+-- Creates a table called products which will hold the products available on Bamazon
 CREATE TABLE products (
     item_id INT NOT NULL AUTO_INCREMENT,
     product_name VARCHAR(50) NULL,
@@ -18,7 +18,7 @@ CREATE TABLE products (
 );
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("The Very Hungry Caterpiller", "Books", 6.59, 100);
+VALUES ("The Very Hungry Caterpiller", "Books", 6.59, 3);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Red Dead Redemption 2", "Video Games", 59.96, 1000);
