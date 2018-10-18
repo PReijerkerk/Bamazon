@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "",
+  password: "Pinapple55$",
   database: "bamazon_DB",
 });
 
@@ -34,72 +34,58 @@ const displayProducts = function (){
       //Logs the item id, name, and price of each item in the table
       console.log("Product ID: " + res[i].item_id + " || Product Name: " + res[i].product_name + " || Price: " + res[i].price);
       userChoice();
-  });
+    });
 };
 
 
 const userChoice = function () {
-  connection.query("SELECT * FROM products", function(err, res){ 
-    if (err) throw err;
     inquirer.prompt([
       {
         //Inquirer prompt asking user which unit they would like to buy
-        name: "choice",
-        type: "rawlist",
-        choices: function(){
-          let choiceArray=[];
-          for (var i = 0; i < res.length; i++) {
-            choiceArray.push(res[i].item_id);
+        name: 'product_ID',
+        type: 'input',
+        message: 'What item_id were you interested in buying?',
+        validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+            return false;
         }
-        return choiceArray;
       },
-        message: "What item_id were you interested in buying?"
-        },
       {
         //Inquirer prompt asking user how many items of [id] they would like to buy
-        name: "amount",
+        name: "buy_amount",
         type: "input",
-        message: "How many of the item did you want to buy?"
-      }
-    ])
-    .then(function(answer) {
-      //Sets chosenItem equal to the user choices res
-      let chosenItem;
-      for (var i = 0; i < res.length; i++) {
-        if (res[i].item_id === answer.choice) {
-          chosenItem = res[i];
+        message: "How many of the item did you want to buy?",
+        validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+            return false;
         }
       }
-      //Determines if the store has sufficient quantity to fulfill the order
-      if (chosenItem.stock_quantity >= parseInt(answer.amount)) {
-        connection.query(
-          //Updates the products table to reflect the new quantity after the sucessful sale
-          "UPDATE products SET ? WHERE ?",
-        [
-          {
-            stock_quantity: answer.amount
-          },
-          {
-            item_id: chosenItem.item_id
-          }
-        ],
-          function(err) {
-            if(err) throw err;
-            console.log("Sale was successful");
-            //Shows the user their total purchase price
-            console.log("------------------");
-            displayProducts();
-          }
-        );
-      }
-      else {
-          //If stock_quantity is not sufficient to fulfill the user order, displays Insufficient Quantity!
+    ]).then(function(answer) {
+      //Query the database for the selected product_ID
+      let query = "SELECT stock_quantity, price, department_name FROM products WHERE ?";
+      connection.query(query, { item_id: answer.product_ID}, function(err, res) {
+        if (err) throw err;
+
+        //Sets variables for later use in determining if sufficient quantity exists and displaying cost to user
+        let available_Stock = res[0].stock_quantity;
+        let price_per_unit = res[0].price;
+        let department = res[0].department_name;
+
+        //Checks the available stock against the users request of units
+
+        if (available_Stock >= answer.buy_amount) {
+          console.log("Yay Stock Available!");
+        } 
+        else {
           console.log("Insufficient Quantity!");
-          displayProducts();
-      }
+        }
+      });
     });
-  });  
-}
+};
   
 
 
