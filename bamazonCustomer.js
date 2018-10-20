@@ -83,9 +83,9 @@ const userChoice = function () {
           let totalPurchase = answer.buy_amount * price_per_unit;
           console.log("You have purchased " + answer.buy_amount + " units of Product ID " + answer.product_ID);
           console.log("Total cost of your purchase is $" + totalPurchase);
+          console.log("------------");
 
           //Update the database for the new quantity left in inventory
-
           
         } 
         else {
