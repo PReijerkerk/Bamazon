@@ -13,14 +13,13 @@ const connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "Pinapple55$",
+  password: "",
   database: "bamazon_DB",
 });
 
 // connect to the mysql server and sql database
 connection.connect(function(err) {
   if (err) throw err;
-  console.log("This worked!");
   displayProducts();
 });
 
@@ -73,15 +72,26 @@ const userChoice = function () {
         //Sets variables for later use in determining if sufficient quantity exists and displaying cost to user
         let available_Stock = res[0].stock_quantity;
         let price_per_unit = res[0].price;
-        let department = res[0].department_name;
+        //Department is defined here for use in the bamazonSupervisor.js
+        //let department = res[0].department_name;
 
         //Checks the available stock against the users request of units
 
         if (available_Stock >= answer.buy_amount) {
-          console.log("Yay Stock Available!");
+
+          //Shows user the item bought, quantity bought and total price of purchase
+          let totalPurchase = answer.buy_amount * price_per_unit;
+          console.log("You have purchased " + answer.buy_amount + " units of Product ID " + answer.product_ID);
+          console.log("Total cost of your purchase is $" + totalPurchase);
+
+          //Update the database for the new quantity left in inventory
+
+          
         } 
         else {
           console.log("Insufficient Quantity!");
+          console.log("------------");
+          displayProducts();
         }
       });
     });
