@@ -28,6 +28,10 @@ To run this module in the terminal:
 
 `node bamazonManager.js`
 
+##User Flow Examples
+Below is an album showing the general flow of the app for both modules
+https://imgur.com/a/taZxbEc
+
 ## Future Improvements
 
 ### Supervisor Module
