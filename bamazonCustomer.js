@@ -32,6 +32,7 @@ const displayProducts = function (){
     for (var i = 0; i < res.length; i++)
       //Logs the item id, name, and price of each item in the table
       console.log("Product ID: " + res[i].item_id + " || Product Name: " + res[i].product_name + " || Price: " + res[i].price);
+      console.log("------------");
       userChoice();
     });
 };
@@ -85,10 +86,27 @@ const userChoice = function () {
           console.log("Total cost of your purchase is $" + totalPurchase);
           console.log("------------");
 
+          let updatedQuantity = available_Stock - answer.buy_amount
+
           //Update the database for the new quantity left in inventory
-          
+          connection.query("UPDATE products SET ? WHERE ?", [{
+            stock_quantity: updatedQuantity
+          }, {
+            item_id: answer.product_ID
+          }], function(err, res) {
+            if (err) {
+              throw err;
+            } else {
+              //Logs the new quantity of product after users purchase
+              console.log("New stock_quantity is " + updatedQuantity);
+              console.log("------------");
+            }
+          })
+          //Displays the items in the product table
+          displayProducts();
         } 
         else {
+          //If inventory does not have enough demand for users request then tells user that quantity is insufficient
           console.log("Insufficient Quantity!");
           console.log("------------");
           displayProducts();
